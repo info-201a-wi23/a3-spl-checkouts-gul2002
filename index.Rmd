@@ -1,86 +1,69 @@
 ---
 title: "A3: SPL Library Checkouts"
+author: "Gulnoor Brar"
 output: html_document
 ---
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(tidyverse)
+library(stringr)
+
+fivecheckouts <- read.csv("2013-2023-5-Checkouts-SPL.csv",stringsAsFactors = FALSE)
+
+source('chart1_example.R')
+source('chart2_example.R')
+source('Untitled1.R')
+```
 
 ### Introduction
 
-An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
+The only books I have ever read in my life have been mystery books or novels. I still to this day love and adore every single Sherlock holmes, novel, movie, show etc, same goes with Hercule Poirot in agatha Cristie's novels. I kind of miss these types of characters because both of their writers have long gone. So for my love of mystery, I chose this dataset. 
 
+```{r summary info, echo=FALSE, message=FALSE, warning = FALSE}
+source("summary.R")
+```
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
-
-These will likely be calculated using your DPLYR skills, answering questions such as:
-
-- What is the average number of checkouts for each item?
-- What is the month or year with the most/least checkouts for a book that you're interested in?
-- What is the month or year with the most/least checkouts for ebooks?
-- How has the number of print book checkouts changed over time?
-
-Feel free to calculate and report values that you find relevant.
+Summarizing something can be quite difficult, its a smaller picture of a huge thing, what we can do is show a few snippets of what the data holds. Interestingly the most Checkedout mystery author from SPL is none other than **`r summary_info$best_mystery_author`**. This surprised me as I love sherlock holmes much more, but Sir author Conan Doyle was nowhere to be found. Sherlock Holmes however is written by many different Creators, so there was a fair chance of competition between **`r summary_info$best_mystery_author`**'s Hercule Poirot. Sherlock Holmes' books had **`r summary_info$Checkouts_Sherlock`** checkouts and Hercule Poirot's books had **`r summary_info$Checkouts_Hercule`** checkouts. So I suppose we know how won this, I also found it interesting what medium of books people used, since I have always used audiobooks. I found that out of the top 5 most used mediums **`r summary_info$worst_material_type`** was the first and **`r summary_info$best_material_type`** the last.
 
 ### The Dataset
 
-- Who collected/published the data?  
-- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?
-- How was the data collected or generated?  
-- Why was the data collected?  
-- What, if any, ethical questions do you need to consider when working with this data?  
-- What are possible limitations or problems with this data?   (at least 200 words)
+This data was collected and published by Seattle Public Library. 12 different parameters, these included usage class, checkout type, material type, checkout year, checkout month, title, number of checkouts, subject(s), ISBN, creator, publish year, and publication year. I assume it was recorded on a daily-monthly basis since we have many dates throughout the data, this includes months and years. This was collected to display the highest checked-out items monthly. I believe after the Obama administration's open data initiative, this data has been collected for that exact reason, to provide the public with data the government has. People did not know that their data was being collected, but there is no identifying information so I do not feel it's unethical, if people were told about the data being collected, people would not choose some books, which would interfere with the data. These people would not take the books which had promiscuous titles or content, which would take away from any projects we are doing now. In many of the data entries Subjects, and Creator was not properly filled out, and left blank for 50K plus books, which makes this data much less reliable. There is not a rating system in public libraries that could tell us if people actually liked the book they took, so while we add the numbers of checkouts, many of them simply could be chalked up to a good title, or cover, but a rather unrewarding experience. So we cannot conclude a best or worst based on these.
 
+### Best Medium?
 
-### First Trends Over Time Chart
+While it is difficult to say what people like the most we can definately see that audiobooks and ebooks are popular now, I wanted to know what people preferred when they thought of getting a mystery book, and how this has changed over time. 
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+This chart goes over the top 5 mediums and as I thought, audiobooks and ebooks are getting more and more popular by the year
 
-The first chart that you will create and include will show the trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
+``````{r, echo = FALSE, warning = FALSE, message=FALSE, code = readLines("chart1_example.R")}
+``````
 
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
+This chart goes over the top 5 mediums and as I thought, audiobooks and ebooks are getting more and more popular by the year.
 
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
+### Sherlock Holmes vs Hercule Poirot
 
-Here's an example of how to run an R script inside an RMarkdown file:
+These were 2 fictional characters, which originated from books, who were both detectives, so obviously I would love to put them up against eachother over the last decade to see who is the best or atlease the more entertaining detective. 
 
-``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
-```
-
-### Second Trends Over Time Chart
-
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
-
-The second chart that you will create and include will show another trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
 
 ``````{r, echo = FALSE, code = readLines("chart2_example.R")}
-```
+``````
 
-### Your Choice
+This is surprising, Hercule Poirot is alsmot going over Sherlock Holmes checkouts, this makes sense due to the recent movies, but I did not expect this. 
 
-The last chart is up to you. It could be a line plot, scatter plot, histogram, bar plot, stacked bar plot, and more. Here are some requirements to help guide your design:
+### TOP 5 Authors
 
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
+The most important aspect of a mystery book/novel is the story, the way its told, the characters and all this is decided by the authors of those books/novels. This is a heatmap chart of the most Checkedout Creators in 
+the last 10 years.
 
-Here's an example of how to run an R script inside an RMarkdown file:
+``````{r, echo = FALSE, message=FALSE, code = readLines("Untitled1.R")}
+``````
 
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
-```
+There is almost a clear bias in recent years, this is because alot more people are getting into libraries since they have become easy access and the rise of audio books. 
 
+All in all I found this data interesting and I hope you did too.
+
+thank you for reading.
 
